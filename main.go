@@ -10,9 +10,18 @@ func main() {
 
 	fmt.Println("Port Scanner in Go")
 
-	open := port.ScanPorts("tcp", "localhost", 1313)
-	fmt.Printf("Port open: %t\n", open)
+	//open := port.ScanPorts("tcp", "localhost", 1313)
+	//fmt.Printf("Port open: %t\n", open)
 
-	results := port.InitialScan("localhost")
-	fmt.Println(results)
+	// Normal scan
+	//results := port.InitialScan("localhost")
+	//fmt.Println(results)
+
+	// Extensive Scan
+	//extensiveResults := port.ExtensiveScan("localhost")
+	//fmt.Println(extensiveResults)
+
+	//quick Scan
+	quickResults := port.QuickScan("localhost")
+	fmt.Println(quickResults)
 }

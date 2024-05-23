@@ -6,6 +6,9 @@ import (
 	"time"
 )
 
+var commonports = [...]int{7, 20, 21, 22, 23, 25, 43, 53, 67, 68, 80, 110, 123, 137, 138, 143, 443,
+	513, 540, 554, 587, 873, 902, 989, 990, 1194, 3306, 5000, 8080, 8443}
+
 var commonPorts = map[int]string{
 	7:    "echo",
 	20:   "ftp",
@@ -70,4 +73,32 @@ func InitialScan(hostname string) []ScanResult {
 	}
 
 	return results
+}
+
+func ExtensiveScan(hostname string) []ScanResult {
+	var results []ScanResult
+
+	for i := 0; i <= 49152; i++ {
+		results = append(results, ScanPorts("udp", hostname, i))
+	}
+
+	for i := 0; i <= 49152; i++ {
+		results = append(results, ScanPorts("tcp", hostname, i))
+	}
+
+	return results
+}
+
+func QuickScan(hostname string) []ScanResult {
+	var results []ScanResult
+
+	for i := 0; i < len(commonports); i++ {
+		results = append(results, ScanPorts("udp", hostname, commonports[i]))
+	}
+	for i := 0; i <= len(commonports); i++ {
+		results = append(results, ScanPorts("tcp", hostname, commonports[i]))
+	}
+
+	return results
+
 }
