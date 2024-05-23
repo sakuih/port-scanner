@@ -89,13 +89,17 @@ func ExtensiveScan(hostname string) []ScanResult {
 	return results
 }
 
+func GetCommonPorts() int {
+	return len(commonports)
+}
+
 func QuickScan(hostname string) []ScanResult {
 	var results []ScanResult
 
-	for i := 0; i < len(commonports); i++ {
+	for i := 0; i <= len(commonports) - 1; i++ {
 		results = append(results, ScanPorts("udp", hostname, commonports[i]))
 	}
-	for i := 0; i <= len(commonports); i++ {
+	for i := 0; i <= len(commonports) - 1; i++ {
 		results = append(results, ScanPorts("tcp", hostname, commonports[i]))
 	}
 
